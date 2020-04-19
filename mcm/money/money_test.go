@@ -58,3 +58,22 @@ func TestFrancMultiplication(t *testing.T) {
 		t.Errorf("%v != %v", expect, actual)
 	}
 }
+
+func TestFrancEquality(t *testing.T) {
+	francFive1 := NewFranc(5).Money
+	francFive2 := NewFranc(5).Money
+	actual := francFive1.equals(&francFive2)
+	expect := true
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+
+	francFive3 := NewFranc(6).Money
+	actual = francFive1.equals(&francFive3)
+	expect = false
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+}
