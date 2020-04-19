@@ -2,16 +2,16 @@ package money
 
 // Doller ...
 type Doller struct {
-	amount int
+	Money
 }
 
 // NewDoller ...
 func NewDoller(amount int) *Doller {
-	return &Doller{amount}
+	return &Doller{Money{amount}}
 }
 
 func (doller *Doller) times(multiple int) *Doller {
-	return &Doller{doller.amount * multiple}
+	return &Doller{Money{doller.amount * multiple}}
 }
 
 func (doller *Doller) equals(anotherDoller *Doller) bool {
