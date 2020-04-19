@@ -41,3 +41,20 @@ func TestDollerEquality(t *testing.T) {
 	}
 
 }
+
+func TestFrancMultiplication(t *testing.T) {
+	franc := NewFranc(5)
+	actual := *(franc.times(2))
+	expect := *(NewFranc(10))
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+
+	actual = *(franc.times(3))
+	expect = *(NewFranc(15))
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+}
