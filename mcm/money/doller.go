@@ -11,6 +11,5 @@ func NewDoller(amount int) *Doller {
 }
 
 func (doller *Doller) times(multiple int) *Doller {
-	doller.Amount *= 2
-	return doller
+	return &Doller{doller.Amount * multiple}
 }
