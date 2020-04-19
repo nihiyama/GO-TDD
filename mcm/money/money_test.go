@@ -6,20 +6,18 @@ import (
 
 func TestDollerMultiplication(t *testing.T) {
 	doller := NewDoller(5)
-	product := doller.times(2)
-	actual := product.Amount
-	expect := 10
+	actual := *(doller.times(2))
+	expect := *(NewDoller(10))
 
 	if expect != actual {
-		t.Errorf("%d != %d", expect, actual)
+		t.Errorf("%v != %v", expect, actual)
 	}
 
-	product = doller.times(3)
-	actual = product.Amount
-	expect = 15
+	actual = *(doller.times(3))
+	expect = *(NewDoller(15))
 
 	if expect != actual {
-		t.Errorf("%d != %d", expect, actual)
+		t.Errorf("%v != %v", expect, actual)
 	}
 
 }
