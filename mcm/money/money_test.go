@@ -23,17 +23,17 @@ func TestDollerMultiplication(t *testing.T) {
 }
 
 func TestDollerEquality(t *testing.T) {
-	dollerFive1 := NewDoller(5)
-	dollerFive2 := NewDoller(5)
-	actual := dollerFive1.equals(dollerFive2)
+	dollerFive1 := NewDoller(5).Money
+	dollerFive2 := NewDoller(5).Money
+	actual := dollerFive1.equals(&dollerFive2)
 	expect := true
 
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)
 	}
 
-	dollerFive3 := NewDoller(6)
-	actual = dollerFive1.equals(dollerFive3)
+	dollerFive3 := NewDoller(6).Money
+	actual = dollerFive1.equals(&dollerFive3)
 	expect = false
 
 	if expect != actual {

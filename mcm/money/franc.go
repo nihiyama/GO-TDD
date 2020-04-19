@@ -13,7 +13,3 @@ func NewFranc(amount int) *Franc {
 func (franc *Franc) times(multiple int) *Franc {
 	return &Franc{Money{franc.amount * multiple}}
 }
-
-func (franc *Franc) equals(anotherFranc *Franc) bool {
-	return franc.amount == anotherFranc.amount
-}
