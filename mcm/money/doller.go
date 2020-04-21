@@ -1,5 +1,7 @@
 package money
 
+import "reflect"
+
 // Doller ...
 type Doller struct {
 	Money
@@ -12,4 +14,9 @@ func NewDoller(amount int) *Doller {
 
 func (doller *Doller) times(multiple int) *Doller {
 	return &Doller{Money{doller.amount * multiple}}
+}
+
+// GetCurrency is ...
+func (doller *Doller) GetCurrency() interface{} {
+	return reflect.Indirect(reflect.ValueOf(doller)).Interface()
 }
