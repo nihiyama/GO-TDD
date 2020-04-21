@@ -1,8 +1,19 @@
 package money
 
 import (
+	"reflect"
 	"testing"
 )
+
+func TestMoneyGetCurrencyType(t *testing.T) {
+	money := Money{5}
+	actual := reflect.TypeOf(money.GetCurrency())
+	expect := reflect.TypeOf(Money{5})
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+}
 
 func TestDollerMultiplication(t *testing.T) {
 	doller := NewDoller(5)
@@ -22,18 +33,28 @@ func TestDollerMultiplication(t *testing.T) {
 
 }
 
+func TestDollerGetCurrencyType(t *testing.T) {
+	doller := NewDoller(5)
+	actual := reflect.TypeOf(doller.GetCurrency())
+	expect := reflect.TypeOf(*NewDoller(5))
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+}
+
 func TestDollerEquality(t *testing.T) {
-	dollerFive1 := NewDoller(5).Money
-	dollerFive2 := NewDoller(5).Money
-	actual := dollerFive1.equals(&dollerFive2)
+	dollerFive1 := NewDoller(5)
+	dollerFive2 := NewDoller(5)
+	actual := Equals(dollerFive1, dollerFive2)
 	expect := true
 
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)
 	}
 
-	dollerFive3 := NewDoller(6).Money
-	actual = dollerFive1.equals(&dollerFive3)
+	dollerFive2 = NewDoller(6)
+	actual = Equals(dollerFive1, dollerFive2)
 	expect = false
 
 	if expect != actual {
@@ -60,18 +81,38 @@ func TestFrancMultiplication(t *testing.T) {
 }
 
 func TestFrancEquality(t *testing.T) {
-	francFive1 := NewFranc(5).Money
-	francFive2 := NewFranc(5).Money
-	actual := francFive1.equals(&francFive2)
+	francFive1 := NewFranc(5)
+	francFive2 := NewFranc(5)
+	actual := Equals(francFive1, francFive2)
 	expect := true
 
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)
 	}
 
-	francFive3 := NewFranc(6).Money
-	actual = francFive1.equals(&francFive3)
+	francFive2 = NewFranc(6)
+	actual = Equals(francFive1, francFive2)
 	expect = false
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+}
+
+func TestFrancGetCurrencyType(t *testing.T) {
+	doller := NewFranc(5)
+	actual := reflect.TypeOf(doller.GetCurrency())
+	expect := reflect.TypeOf(*NewFranc(5))
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+}
+func TestFrancDollerEquality(t *testing.T) {
+	francFive1 := NewFranc(5)
+	dollerFive1 := NewDoller(5)
+	actual := Equals(francFive1, dollerFive1)
+	expect := false
 
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)
