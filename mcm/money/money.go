@@ -12,6 +12,7 @@ type Money struct {
 // Currency is ...
 type Currency interface {
 	GetCurrency() interface{}
+	GetCurrencyName() string
 	Times(int) *Money
 }
 
@@ -23,6 +24,11 @@ func NewMoney(amount int) *Money {
 // GetCurrency is ...
 func (money *Money) GetCurrency() interface{} {
 	return reflect.Indirect(reflect.ValueOf(money)).Interface()
+}
+
+// GetCurrencyName is ...
+func (money *Money) GetCurrencyName() string {
+	return "None"
 }
 
 // Times is ..

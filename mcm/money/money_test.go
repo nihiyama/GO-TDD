@@ -25,6 +25,33 @@ func TestMoneyMultiplication(t *testing.T) {
 	}
 }
 
+func TestMoneyCurrencyName(t *testing.T) {
+	money := NewMoney(5)
+	actual := money.GetCurrencyName()
+	expect := "None"
+
+	if expect != actual {
+		t.Errorf("%s != %s", expect, actual)
+	}
+
+	doller := NewDoller(5)
+	actual = doller.GetCurrencyName()
+	expect = "USD"
+
+	if expect != actual {
+		t.Errorf("%s != %s", expect, actual)
+	}
+
+	franc := NewFranc(5)
+	actual = franc.GetCurrencyName()
+	expect = "CHF"
+
+	if expect != actual {
+		t.Errorf("%s != %s", expect, actual)
+	}
+
+}
+
 // func TestDollerMultiplication(t *testing.T) {
 // 	doller := NewMoney(5)
 // 	actual := *doller.Times(2)

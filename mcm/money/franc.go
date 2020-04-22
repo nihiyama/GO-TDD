@@ -20,3 +20,8 @@ func NewFranc(amount int) *Franc {
 func (franc *Franc) GetCurrency() interface{} {
 	return reflect.Indirect(reflect.ValueOf(franc)).Interface()
 }
+
+// GetCurrencyName is ...
+func (franc *Franc) GetCurrencyName() string {
+	return "CHF"
+}
