@@ -9,7 +9,8 @@ type Franc struct {
 
 // NewFranc ...
 func NewFranc(amount int) *Franc {
-	return &Franc{Money{amount}}
+	currency := "CHF"
+	return &Franc{Money{amount, currency}}
 }
 
 // func (franc *Franc) times(multiple int) *Franc {
@@ -23,5 +24,5 @@ func (franc *Franc) GetCurrency() interface{} {
 
 // GetCurrencyName is ...
 func (franc *Franc) GetCurrencyName() string {
-	return "CHF"
+	return franc.currency
 }

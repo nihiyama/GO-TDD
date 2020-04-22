@@ -6,7 +6,8 @@ import (
 
 // Money is ...
 type Money struct {
-	amount int
+	amount   int
+	currency string
 }
 
 // Currency is ...
@@ -18,7 +19,8 @@ type Currency interface {
 
 // NewMoney is ...
 func NewMoney(amount int) *Money {
-	return &Money{amount}
+	currency := "None"
+	return &Money{amount, currency}
 }
 
 // GetCurrency is ...
@@ -28,12 +30,12 @@ func (money *Money) GetCurrency() interface{} {
 
 // GetCurrencyName is ...
 func (money *Money) GetCurrencyName() string {
-	return "None"
+	return money.currency
 }
 
 // Times is ..
 func (money *Money) Times(multiple int) *Money {
-	return &Money{money.amount * multiple}
+	return NewMoney(money.amount * multiple)
 }
 
 // Equals is ..

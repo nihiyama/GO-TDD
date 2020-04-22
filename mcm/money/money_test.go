@@ -8,7 +8,7 @@ import (
 func TestMoneyGetCurrencyType(t *testing.T) {
 	money := NewMoney(5)
 	actual := reflect.TypeOf(money.GetCurrency())
-	expect := reflect.TypeOf(Money{5})
+	expect := reflect.TypeOf(*NewMoney(5))
 
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)

@@ -9,7 +9,8 @@ type Doller struct {
 
 // NewDoller ...
 func NewDoller(amount int) *Doller {
-	return &Doller{Money{amount}}
+	currency := "USD"
+	return &Doller{Money{amount, currency}}
 }
 
 // func (doller *Doller) times(multiple int) *Doller {
