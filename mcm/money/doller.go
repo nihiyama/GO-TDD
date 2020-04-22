@@ -20,3 +20,8 @@ func NewDoller(amount int) *Doller {
 func (doller *Doller) GetCurrency() interface{} {
 	return reflect.Indirect(reflect.ValueOf(doller)).Interface()
 }
+
+// GetCurrencyName is ...
+func (doller *Doller) GetCurrencyName() string {
+	return "USD"
+}
