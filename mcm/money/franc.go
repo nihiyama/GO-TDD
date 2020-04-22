@@ -12,9 +12,9 @@ func NewFranc(amount int) *Franc {
 	return &Franc{Money{amount}}
 }
 
-func (franc *Franc) times(multiple int) *Franc {
-	return &Franc{Money{franc.amount * multiple}}
-}
+// func (franc *Franc) times(multiple int) *Franc {
+// 	return &Franc{Money{franc.amount * multiple}}
+// }
 
 // GetCurrency is ...
 func (franc *Franc) GetCurrency() interface{} {
