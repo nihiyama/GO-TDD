@@ -40,6 +40,10 @@ func (money *Money) Times(multiple int) *Money {
 	return NewMoney(money.amount * multiple)
 }
 
+func (money *Money) plus(add *Money) *Money {
+	return NewMoney(money.amount+add.amount, money.currency)
+}
+
 // Equals is ..
 func Equals(currency Currency, anotherCurrency Currency) bool {
 	rfValue := reflect.Indirect(reflect.ValueOf(currency.GetCurrency()))

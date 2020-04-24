@@ -71,6 +71,16 @@ func TestMoneyEquality(t *testing.T) {
 	}
 }
 
+func TestSimpleAddition(t *testing.T) {
+	money := NewMoney(5)
+	actual := *money.plus(NewMoney(5))
+	expect := *NewMoney(10)
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+}
+
 func TestDollerEquality(t *testing.T) {
 	dollerFive1 := NewDoller(5)
 	dollerFive2 := NewDoller(5)
