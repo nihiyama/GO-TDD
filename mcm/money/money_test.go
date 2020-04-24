@@ -52,34 +52,6 @@ func TestMoneyCurrencyName(t *testing.T) {
 
 }
 
-// func TestDollerMultiplication(t *testing.T) {
-// 	doller := NewMoney(5)
-// 	actual := *doller.Times(2)
-// 	expect := *NewMoney(10)
-
-// 	if expect != actual {
-// 		t.Errorf("%v != %v", expect, actual)
-// 	}
-
-// 	actual = *doller.Times(3)
-// 	expect = *NewMoney(15)
-
-// 	if expect != actual {
-// 		t.Errorf("%v != %v", expect, actual)
-// 	}
-
-// }
-
-// func TestDollerGetCurrencyType(t *testing.T) {
-// 	doller := NewDoller(5)
-// 	actual := reflect.TypeOf(doller.GetCurrency())
-// 	expect := reflect.TypeOf(*NewDoller(5))
-
-// 	if expect != actual {
-// 		t.Errorf("%v != %v", expect, actual)
-// 	}
-// }
-
 func TestMoneyEquality(t *testing.T) {
 	moneyFive1 := NewMoney(5)
 	moneyFive2 := NewMoney(5)
@@ -119,23 +91,6 @@ func TestDollerEquality(t *testing.T) {
 
 }
 
-// func TestFrancMultiplication(t *testing.T) {
-// 	franc := NewMoney(5)
-// 	actual := *franc.Times(2)
-// 	expect := *NewMoney(10)
-
-// 	if expect != actual {
-// 		t.Errorf("%v != %v", expect, actual)
-// 	}
-
-// 	actual = *franc.Times(3)
-// 	expect = *NewMoney(15)
-
-// 	if expect != actual {
-// 		t.Errorf("%v != %v", expect, actual)
-// 	}
-// }
-
 func TestFrancEquality(t *testing.T) {
 	francFive1 := NewFranc(5)
 	francFive2 := NewFranc(5)
@@ -154,16 +109,6 @@ func TestFrancEquality(t *testing.T) {
 		t.Errorf("%v != %v", expect, actual)
 	}
 }
-
-// func TestFrancGetCurrencyType(t *testing.T) {
-// 	doller := NewFranc(5)
-// 	actual := reflect.TypeOf(doller.GetCurrency())
-// 	expect := reflect.TypeOf(*NewFranc(5))
-
-// 	if expect != actual {
-// 		t.Errorf("%v != %v", expect, actual)
-// 	}
-// }
 
 func TestFrancDollerEquality(t *testing.T) {
 	francFive1 := NewFranc(5)
