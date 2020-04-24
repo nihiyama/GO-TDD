@@ -174,4 +174,20 @@ func TestFrancDollerEquality(t *testing.T) {
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)
 	}
+
+	moneyFive1 := NewMoney(5, "CHF")
+	actual = Equals(francFive1, moneyFive1)
+	expect = true
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+
+	actual = Equals(dollerFive1, moneyFive1)
+	expect = false
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+
 }

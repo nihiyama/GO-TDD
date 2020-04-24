@@ -18,9 +18,11 @@ type Currency interface {
 }
 
 // NewMoney is ...
-func NewMoney(amount int) *Money {
-	currency := "None"
-	return &Money{amount, currency}
+func NewMoney(amount int, currency ...string) *Money {
+	if len(currency) == 0 {
+		currency = append(currency, "None")
+	}
+	return &Money{amount, currency[0]}
 }
 
 // GetCurrency is ...
@@ -42,12 +44,16 @@ func (money *Money) Times(multiple int) *Money {
 func Equals(currency Currency, anotherCurrency Currency) bool {
 	rfValue := reflect.Indirect(reflect.ValueOf(currency.GetCurrency()))
 	rfAnotherValue := reflect.Indirect(reflect.ValueOf(anotherCurrency.GetCurrency()))
+	var rfMoney, rfAnotherMoney Money
 	if rfValue.Type().Field(0).Name == "Money" {
-		rfAmount := rfValue.FieldByName("Money").Interface().(Money).amount
-		rfAnotherAmount := rfAnotherValue.FieldByName("Money").Interface().(Money).amount
-		return rfAmount == rfAnotherAmount && rfValue.Type() == rfAnotherValue.Type()
+		rfMoney = rfValue.FieldByName("Money").Interface().(Money)
+	} else {
+		rfMoney = rfValue.Interface().(Money)
 	}
-	rfAmount := rfValue.Interface().(Money).amount
-	rfAnotherAmount := rfAnotherValue.Interface().(Money).amount
-	return rfAmount == rfAnotherAmount && rfValue.Type() == rfAnotherValue.Type()
+	if rfAnotherValue.Type().Field(0).Name == "Money" {
+		rfAnotherMoney = rfAnotherValue.FieldByName("Money").Interface().(Money)
+	} else {
+		rfAnotherMoney = rfAnotherValue.Interface().(Money)
+	}
+	return rfMoney.amount == rfAnotherMoney.amount && rfMoney.currency == rfAnotherMoney.currency
 }
