@@ -13,10 +13,6 @@ func NewDoller(amount int) *Doller {
 	return &Doller{Money{amount, currency}}
 }
 
-// func (doller *Doller) times(multiple int) *Doller {
-// 	return &Doller{Money{doller.amount * multiple}}
-// }
-
 // GetCurrency is ...
 func (doller *Doller) GetCurrency() interface{} {
 	return reflect.Indirect(reflect.ValueOf(doller)).Interface()
