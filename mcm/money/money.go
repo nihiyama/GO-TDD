@@ -29,7 +29,8 @@ func (money *Money) times(multiple int) *Money {
 	return NewMoney(money.amount * multiple)
 }
 
-func (money *Money) plus(add *Money) *Money {
+// Plus is ...
+func (money *Money) Plus(add *Money) *Money {
 	return NewMoney(money.amount+add.amount, money.currency)
 }
 

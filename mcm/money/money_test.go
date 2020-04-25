@@ -45,12 +45,23 @@ func TestMoneyEquality(t *testing.T) {
 
 func TestSimpleAddition(t *testing.T) {
 	money := NewMoney(5)
-	actual := *money.plus(NewMoney(5))
+	actual := *money.Plus(NewMoney(5))
 	expect := *NewMoney(10)
 
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)
 	}
+
+	doller1 := NewDoller(5)
+	sum := doller1.Plus(doller1)
+	bank := NewBank()
+	actual = *bank.reduce(sum, "USD")
+	expect = *NewDoller(10)
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+
 }
 
 func TestDollerEquality(t *testing.T) {
