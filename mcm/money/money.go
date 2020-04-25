@@ -1,21 +1,15 @@
 package money
 
-import (
-	"reflect"
-)
-
 // Money is ...
 type Money struct {
 	amount   int
 	currency string
 }
 
-// Currency is ...
-type Currency interface {
-	GetCurrency() interface{}
-	GetCurrencyName() string
-	Times(int) *Money
-}
+// // Currency is ...
+// type Currency interface {
+// 	GetCurrency() interface{}
+// }
 
 // NewMoney is ...
 func NewMoney(amount int, currency ...string) *Money {
@@ -26,17 +20,12 @@ func NewMoney(amount int, currency ...string) *Money {
 }
 
 // GetCurrency is ...
-func (money *Money) GetCurrency() interface{} {
-	return reflect.Indirect(reflect.ValueOf(money)).Interface()
-}
-
-// GetCurrencyName is ...
-func (money *Money) GetCurrencyName() string {
-	return money.currency
-}
+// func (money *Money) GetCurrency() interface{} {
+// 	return reflect.Indirect(reflect.ValueOf(money)).Interface()
+// }
 
 // Times is ..
-func (money *Money) Times(multiple int) *Money {
+func (money *Money) times(multiple int) *Money {
 	return NewMoney(money.amount * multiple)
 }
 
@@ -44,20 +33,16 @@ func (money *Money) plus(add *Money) *Money {
 	return NewMoney(money.amount+add.amount, money.currency)
 }
 
-// Equals is ..
-func Equals(currency Currency, anotherCurrency Currency) bool {
-	rfValue := reflect.Indirect(reflect.ValueOf(currency.GetCurrency()))
-	rfAnotherValue := reflect.Indirect(reflect.ValueOf(anotherCurrency.GetCurrency()))
-	var rfMoney, rfAnotherMoney Money
-	if rfValue.Type().Field(0).Name == "Money" {
-		rfMoney = rfValue.FieldByName("Money").Interface().(Money)
-	} else {
-		rfMoney = rfValue.Interface().(Money)
-	}
-	if rfAnotherValue.Type().Field(0).Name == "Money" {
-		rfAnotherMoney = rfAnotherValue.FieldByName("Money").Interface().(Money)
-	} else {
-		rfAnotherMoney = rfAnotherValue.Interface().(Money)
-	}
-	return rfMoney.amount == rfAnotherMoney.amount && rfMoney.currency == rfAnotherMoney.currency
+func (money *Money) equals(anotheMoney *Money) bool {
+	return money.amount == anotheMoney.amount &&
+		money.currency == anotheMoney.currency
 }
+
+// Equals is ..
+// func Equals(currency Currency, anotherCurrency Currency) bool {
+// 	rfValue := reflect.Indirect(reflect.ValueOf(currency.GetCurrency()))
+// 	rfAnotherValue := reflect.Indirect(reflect.ValueOf(anotherCurrency.GetCurrency()))
+// 	rfMoney := rfValue.Interface().(Money)
+// 	rfAnotherMoney := rfAnotherValue.Interface().(Money)
+// 	return rfMoney.amount == rfAnotherMoney.amount && rfMoney.currency == rfAnotherMoney.currency
+// }

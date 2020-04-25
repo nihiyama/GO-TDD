@@ -1,24 +1,7 @@
 package money
 
-import "reflect"
-
-// Franc ...
-type Franc struct {
-	Money
-}
-
 // NewFranc ...
-func NewFranc(amount int) *Franc {
+func NewFranc(amount int) *Money {
 	currency := "CHF"
-	return &Franc{Money{amount, currency}}
-}
-
-// GetCurrency is ...
-func (franc *Franc) GetCurrency() interface{} {
-	return reflect.Indirect(reflect.ValueOf(franc)).Interface()
-}
-
-// GetCurrencyName is ...
-func (franc *Franc) GetCurrencyName() string {
-	return franc.currency
+	return &Money{amount, currency}
 }
