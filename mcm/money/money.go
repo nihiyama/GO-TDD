@@ -41,6 +41,11 @@ func (money *Money) ToString() string {
 	return fmt.Sprintf("[%d, %s]", money.amount, money.currency)
 }
 
+// GetMoney is ...
+func (money *Money) GetMoney() []Money {
+	return []Money{*money}
+}
+
 func (money *Money) equals(anotheMoney *Money) bool {
 	return money.amount == anotheMoney.amount &&
 		money.currency == anotheMoney.currency

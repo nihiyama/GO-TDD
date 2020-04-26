@@ -10,5 +10,9 @@ func NewBank() *Bank {
 }
 
 func (bank *Bank) reduce(expression Expression, to string) *Money {
-	return NewDoller(10)
+	resultAmount := 0
+	for _, money := range expression.GetMoney() {
+		resultAmount += money.amount
+	}
+	return NewMoney(resultAmount, to)
 }
