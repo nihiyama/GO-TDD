@@ -17,3 +17,8 @@ func NewSum(augend Money, addend Money) *Sum {
 func (sum *Sum) ToString() string {
 	return fmt.Sprintf("[%v, %v]", sum.augend, sum.addend)
 }
+
+// GetMoney is ...
+func (sum *Sum) GetMoney() []Money {
+	return []Money{sum.augend, sum.addend}
+}

@@ -159,5 +159,55 @@ func TestFrancDollerEquality(t *testing.T) {
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)
 	}
+}
+
+func TestMoneyGetMoney(t *testing.T) {
+	five := NewDoller(5)
+	actualSlice := five.GetMoney()
+	expectSlice := []Money{*NewDoller(5)}
+	var actual, expect Money
+	if len(expectSlice) == len(actualSlice) {
+		for i := 0; i < len(actualSlice); i++ {
+			actual = actualSlice[i]
+			expect = expectSlice[i]
+			if expect != actual {
+				t.Errorf("%v != %v", expect, actual)
+			}
+		}
+	} else {
+		t.Errorf("Size of slice is not match(%d, %d)", len(expectSlice), len(actualSlice))
+	}
+}
+
+func TestSumGetMoney(t *testing.T) {
+	five := NewDoller(5)
+	six := NewDoller(5)
+	sum := NewSum(*five, *six)
+	actualSlice := sum.GetMoney()
+	expectSlice := []Money{*NewDoller(5), *NewDoller(5)}
+	var actual, expect Money
+
+	if len(expectSlice) == len(actualSlice) {
+		for i := 0; i < len(actualSlice); i++ {
+			actual = actualSlice[i]
+			expect = expectSlice[i]
+			if expect != actual {
+				t.Errorf("%v != %v", expect, actual)
+			}
+		}
+	} else {
+		t.Errorf("Size of slice is not match(%d, %d)", len(expectSlice), len(actualSlice))
+	}
+}
+
+func TestReduceSum(t *testing.T) {
+	sum := NewSum(*NewMoney(3), *NewMoney(4))
+	bank := NewBank()
+	actual := *bank.reduce(sum, "USD")
+	expect := *NewDoller(7)
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
 
 }
