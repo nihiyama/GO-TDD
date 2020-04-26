@@ -24,6 +24,28 @@ func TestMoneyMultiplication(t *testing.T) {
 	}
 }
 
+func TestMoneyStringfy(t *testing.T) {
+	doller := NewDoller(5)
+	actual := doller.ToString()
+	expect := "[5, USD]"
+
+	if expect != actual {
+		t.Errorf("%s != %s", expect, actual)
+	}
+}
+
+func TestSumStringfy(t *testing.T) {
+	doller := NewDoller(5)
+	franc := NewFranc(5)
+	sum := NewSum(*doller, *franc)
+	actual := sum.ToString()
+	expect := "[{5 USD}, {5 CHF}]"
+
+	if expect != actual {
+		t.Errorf("%s != %s", expect, actual)
+	}
+}
+
 func TestMoneyEquality(t *testing.T) {
 	moneyFive1 := NewMoney(5)
 	moneyFive2 := NewMoney(5)
@@ -44,19 +66,29 @@ func TestMoneyEquality(t *testing.T) {
 }
 
 func TestSimpleAddition(t *testing.T) {
-	money := NewMoney(5)
-	actual := *money.Plus(NewMoney(5))
-	expect := *NewMoney(10)
+	five := NewDoller(5)
+	sum := five.plus(five)
+	bank := NewBank()
+	actual := *bank.reduce(sum, "USD")
+	expect := *NewDoller(10)
 
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)
 	}
 
-	doller1 := NewDoller(5)
-	sum := doller1.Plus(doller1)
-	bank := NewBank()
-	actual = *bank.reduce(sum, "USD")
-	expect = *NewDoller(10)
+}
+
+func TestPlusReturnSum(t *testing.T) {
+	five := NewDoller(5)
+	sum := five.plus(five)
+	actual := sum.augend
+	expect := *five
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+
+	actual = sum.addend
 
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)

@@ -1,5 +1,7 @@
 package money
 
+import "fmt"
+
 // Money is ...
 type Money struct {
 	amount   int
@@ -30,8 +32,13 @@ func (money *Money) times(multiple int) *Money {
 }
 
 // Plus is ...
-func (money *Money) Plus(add *Money) *Money {
-	return NewMoney(money.amount+add.amount, money.currency)
+func (money *Money) plus(add *Money) *Sum {
+	return NewSum(*money, *add)
+}
+
+// ToString ...
+func (money *Money) ToString() string {
+	return fmt.Sprintf("[%d, %s]", money.amount, money.currency)
 }
 
 func (money *Money) equals(anotheMoney *Money) bool {
