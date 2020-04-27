@@ -200,11 +200,38 @@ func TestSumGetMoney(t *testing.T) {
 	}
 }
 
-func TestReduceSum(t *testing.T) {
+func TestMoneyReduce(t *testing.T) {
+	five := NewMoney(5)
+	actual := *five.Reduce("USD")
+	expect := *NewDoller(5)
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+}
+
+func TestSumReduce(t *testing.T) {
+	sum := NewSum(*NewMoney(5), *NewMoney(5))
+	actual := *sum.Reduce("USD")
+	expect := *NewDoller(10)
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+}
+
+func TestBankReduce(t *testing.T) {
 	sum := NewSum(*NewMoney(3), *NewMoney(4))
 	bank := NewBank()
 	actual := *bank.reduce(sum, "USD")
 	expect := *NewDoller(7)
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
+
+	doller := NewDoller(7)
+	actual = *bank.reduce(doller, "USD")
 
 	if expect != actual {
 		t.Errorf("%v != %v", expect, actual)

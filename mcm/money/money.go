@@ -46,6 +46,11 @@ func (money *Money) GetMoney() []Money {
 	return []Money{*money}
 }
 
+// Reduce is ...
+func (money *Money) Reduce(to string) *Money {
+	return NewMoney(money.amount, to)
+}
+
 func (money *Money) equals(anotheMoney *Money) bool {
 	return money.amount == anotheMoney.amount &&
 		money.currency == anotheMoney.currency
