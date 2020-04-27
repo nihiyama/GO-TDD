@@ -22,3 +22,9 @@ func (sum *Sum) ToString() string {
 func (sum *Sum) GetMoney() []Money {
 	return []Money{sum.augend, sum.addend}
 }
+
+// Reduce is ...
+func (sum *Sum) Reduce(to string) *Money {
+	resultAmount := sum.augend.amount + sum.addend.amount
+	return NewMoney(resultAmount, to)
+}
