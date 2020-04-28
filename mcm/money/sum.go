@@ -24,7 +24,7 @@ func (sum *Sum) GetMoney() []Money {
 }
 
 // Reduce is ...
-func (sum *Sum) Reduce(to string) *Money {
+func (sum *Sum) Reduce(bank *Bank, to string) *Money {
 	resultAmount := sum.augend.amount + sum.addend.amount
 	return NewMoney(resultAmount, to)
 }

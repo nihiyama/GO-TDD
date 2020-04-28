@@ -47,8 +47,9 @@ func (money *Money) GetMoney() []Money {
 }
 
 // Reduce is ...
-func (money *Money) Reduce(to string) *Money {
-	return NewMoney(money.amount, to)
+func (money *Money) Reduce(bank *Bank, to string) *Money {
+	rate := bank.rate(money.currency, to)
+	return NewMoney(money.amount/rate, to)
 }
 
 func (money *Money) equals(anotheMoney *Money) bool {

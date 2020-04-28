@@ -4,5 +4,5 @@ package money
 type Expression interface {
 	ToString() string
 	GetMoney() []Money
-	Reduce(string) *Money
+	Reduce(*Bank, string) *Money
 }

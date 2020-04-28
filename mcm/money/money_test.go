@@ -201,8 +201,9 @@ func TestSumGetMoney(t *testing.T) {
 }
 
 func TestMoneyReduce(t *testing.T) {
-	five := NewMoney(5)
-	actual := *five.Reduce("USD")
+	five := NewDoller(5)
+	bank := NewBank()
+	actual := *five.Reduce(bank, "USD")
 	expect := *NewDoller(5)
 
 	if expect != actual {
@@ -211,8 +212,9 @@ func TestMoneyReduce(t *testing.T) {
 }
 
 func TestSumReduce(t *testing.T) {
-	sum := NewSum(*NewMoney(5), *NewMoney(5))
-	actual := *sum.Reduce("USD")
+	sum := NewSum(*NewDoller(5), *NewDoller(5))
+	bank := NewBank()
+	actual := *sum.Reduce(bank, "USD")
 	expect := *NewDoller(10)
 
 	if expect != actual {
@@ -237,4 +239,45 @@ func TestBankReduce(t *testing.T) {
 		t.Errorf("%v != %v", expect, actual)
 	}
 
+}
+
+func TestPairEquals(t *testing.T) {
+	pair1 := NewPair("CHF", "USD")
+	pair2 := NewPair("CHF", "USD")
+
+	actual := pair1.equals(pair2)
+	expect := true
+
+	if expect != actual {
+		t.Errorf("%t != %t", expect, actual)
+	}
+
+	pair3 := NewPair("YEN", "USD")
+	actual = pair1.equals(pair3)
+	expect = false
+
+	if expect != actual {
+		t.Errorf("%t != %t", expect, actual)
+	}
+}
+
+func TestPairHashCode(t *testing.T) {
+	pair1 := NewPair("CHF", "USD")
+	actual := pair1.hachCode()
+	expect := 0
+
+	if expect != actual {
+		t.Errorf("%d != %d", expect, actual)
+	}
+}
+
+func TestReduceMoneyDifferentCurrency(t *testing.T) {
+	bank := NewBank()
+	bank.addRate("CHF", "USD", 2)
+	actual := *bank.reduce(NewFranc(2), "USD")
+	expect := *NewDoller(1)
+
+	if expect != actual {
+		t.Errorf("%v != %v", expect, actual)
+	}
 }
